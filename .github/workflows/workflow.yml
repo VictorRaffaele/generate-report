@@ -11,5 +11,5 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Actions Check
-      uses: ./workflows
+    - name: Flake8 Check
+      uses: ./.github/actions/flake8
