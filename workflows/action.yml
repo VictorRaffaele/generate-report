@@ -22,5 +22,3 @@ jobs:
       - name: Run Flake8
         run: |
           flake8
-
-workflow_path: workflow/flake8.yml
