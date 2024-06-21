@@ -23,3 +23,8 @@ runs:
       run: |
         flake8
       shell: bash
+
+    - name: Run Unittest
+      run: |
+        python3 -m unittest discover test/
+      shell: bash
