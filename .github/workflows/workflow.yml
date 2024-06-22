@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  checks:
+  flake8:
     runs-on: ubuntu-latest
 
     steps:
@@ -15,4 +15,14 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Flake8 Check
-      uses: ./workflow
+      uses: ./workflow/flake8
+
+  unittest:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Unittest Check
+      uses: ./workflow/unittest
