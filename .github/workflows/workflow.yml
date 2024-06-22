@@ -18,4 +18,4 @@ jobs:
       uses: ./workflow/flake8
 
     - name: Unittest Check
-      users: ./workflow/unittest
+      uses: ./workflow/unittest
