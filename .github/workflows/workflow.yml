@@ -15,4 +15,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Flake8 Check
-      uses: ./workflow
+      uses: ./workflow/flake8
+
+    - name: Unittest Check
+      users: ./workflow/unittest
