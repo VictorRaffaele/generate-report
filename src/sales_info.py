@@ -6,7 +6,7 @@ class SalesInfo:
         arr = []
 
         for order in self.__orders:
-            total_sold = int(order['quantity'].sum()) 
+            total_sold = int(order['quantity'].sum())
             total_price = float(self.total_amount(order))
 
             arr.append({
