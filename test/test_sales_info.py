@@ -41,6 +41,16 @@ class TestSalesInfo(unittest.TestCase):
 
         self.assertEqual(result, expected_result)
 
+    def test_inverse_products_sold(self):
+        expected_result = [
+            {'product_id': 2, 'product_name': 'Product B', 'total_sold': 30, 'total_amount': 1680.0},
+            {'product_id': 3, 'product_name': 'Product C', 'total_sold': 40, 'total_amount': 4650.0},
+            {'product_id': 1, 'product_name': 'Product A', 'total_sold': 60, 'total_amount': 5050.0}
+        ]
+        result = self.sales_info.products_solds('total_amount', 3, False)
+
+        self.assertEqual(result, expected_result)
+
     def test_total_amount(self):
         order = self.orders[0]
         expected_total = 5050.0
