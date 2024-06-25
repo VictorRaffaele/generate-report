@@ -17,7 +17,7 @@ class Base:
 
         return country
 
-    def n_sales(self, merged_orders: list[object], order) -> list[object]:
+    def n_sales(self, merged_orders: list[object], inverse: bool) -> list[object]:
         sales_divide = self.divide_csv(merged_orders, 'employee_id')
         sales = []
 
@@ -31,4 +31,4 @@ class Base:
                 'n_sales': len(sale)
             })
 
-        return sorted(sales, key=lambda key: key["n_sales"], reverse=order)
+        return sorted(sales, key=lambda key: key["n_sales"], reverse=inverse)
