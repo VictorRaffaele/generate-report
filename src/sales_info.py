@@ -2,7 +2,7 @@ class SalesInfo:
     def __init__(self, orders: list[object]):
         self.__orders = orders
 
-    def products_solds(self, sort_key: str, num_lines: int) -> list:
+    def products_solds(self, sort_key: str, num_lines: int, inverse=True) -> list:
         arr = []
 
         for order in self.__orders:
@@ -16,7 +16,7 @@ class SalesInfo:
               'total_amount': total_price
             })
 
-        return sorted(arr, key=lambda key: key[f"{sort_key}"], reverse=True)[:num_lines]
+        return sorted(arr, key=lambda key: key[f"{sort_key}"], reverse=inverse)[:num_lines]
 
     def total_amount(self, order: object) -> float:
         total = 0
