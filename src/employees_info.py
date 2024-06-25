@@ -32,7 +32,7 @@ class EmployeesInfo(Base):
 
         return supervisors
 
-    def n_sales(self, df_orders: list[object], order=True) -> list[object]:
+    def n_sales(self, df_orders: list[object], inverse=True) -> list[object]:
         merged_orders = pd.merge(df_orders, self.__employees)
-        n_sales = super().n_sales(merged_orders, order)
+        n_sales = super().n_sales(merged_orders, inverse)
         return n_sales
