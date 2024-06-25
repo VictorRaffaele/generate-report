@@ -1,0 +1,38 @@
+import pandas as pd
+from base import Base
+
+
+class EmployeesInfo(Base):
+    def __init__(self, employees: dict):
+        self.__employees = employees
+
+    def region(self) -> object:
+        countrys = super().region(self.__employees)
+        return countrys
+
+    def supervision(self) -> list[object]:
+        employees_list = super().divide_csv(self.__employees, 'employee_id')
+        supervisors_list = super().divide_csv(self.__employees, 'reports_to')
+        supervisors = []
+
+        for employee in employees_list:
+            for supervisor in supervisors_list:
+                employee_id = int(employee['employee_id'].iloc[0])
+                supervisor_id = int(supervisor['reports_to'].iloc[0])
+
+                if employee_id == supervisor_id:
+                    last_name = employee['last_name'].iloc[0]
+                    first_name = employee['first_name'].iloc[0]
+
+                    supervisors.append({
+                        'name': f'{last_name}, {first_name}',
+                        'supervises': supervisor,
+                        'count': len(supervisor)
+                    })
+
+        return supervisors
+
+    def n_sales(self, df_orders: list[object], order=True) -> list[object]:
+        merged_orders = pd.merge(df_orders, self.__employees)
+        n_sales = super().n_sales(merged_orders, order)
+        return n_sales
