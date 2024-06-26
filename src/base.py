@@ -17,8 +17,8 @@ class Base:
 
         return country
 
-    def n_sales(self, merged_orders: list[object], inverse: bool) -> list[object]:
-        sales_divide = self.divide_csv(merged_orders, 'employee_id')
+    def n_sales(self, merged_orders: list[object], id_key: str, inverse: bool) -> list[object]:
+        sales_divide = self.divide_csv(merged_orders, id_key)
         sales = []
 
         for sale in sales_divide:
@@ -26,7 +26,7 @@ class Base:
             first_name = sale['first_name'].iloc[0]
 
             sales.append({
-                'id': int(sale['employee_id'].iloc[0]),
+                'id': int(sale[id_key].iloc[0]),
                 'name': f'{last_name}, {first_name}',
                 'n_sales': len(sale)
             })
