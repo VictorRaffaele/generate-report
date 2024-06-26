@@ -15,21 +15,22 @@ class TestBase(unittest.TestCase):
                 'employee_id': [1],
                 'last_name': ['Davolio'],
                 'first_name': ['Nancy'],
-                'country': ['USA']
+                'country': ['USA'],
+                'reports_to': [2.0]
 
             },
             {
                 'employee_id': [2],
                 'last_name': ['Fuller'],
                 'first_name': ['Andrew'],
-                'country': ['UK']
-
+                'country': ['UK'],
+                'reports_to': [2.0]
             }
         ]
         result = self.base.divide_csv(self.csv, 'employee_id')
 
-        for i in range(len(result)):
-            self.assertEqual(result[i].to_dict('list'), expected_result[i])
+        self.assertEqual(result[0].to_dict('list'), expected_result[0])
+        self.assertEqual(result[1].to_dict('list'), expected_result[1])
 
     def test_region(self):
         expected_result = {'USA': 1, 'UK': 1}
