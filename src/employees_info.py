@@ -1,5 +1,5 @@
 import pandas as pd
-from base import Base
+from .base import Base
 
 
 class EmployeesInfo(Base):
@@ -34,5 +34,5 @@ class EmployeesInfo(Base):
 
     def n_sales(self, df_orders: list[object], inverse=True) -> list[object]:
         merged_orders = pd.merge(df_orders, self.__employees)
-        n_sales = super().n_sales(merged_orders, inverse)
+        n_sales = super().n_sales(merged_orders, 'employee_id', inverse)
         return n_sales
