@@ -22,13 +22,25 @@ class Base:
         sales = []
 
         for sale in sales_divide:
+            sales.append(self.generate_sales_object(sale, id_key))
+
+        return sorted(sales, key=lambda key: key["n_sales"], reverse=inverse)
+
+    def generate_sales_object(self, sale: object, id_key: str):
+        if id_key == 'customer_id':
+            return {
+                'id': sale[id_key].iloc[0],
+                'company_name': sale['company_name'].iloc[0],
+                'n_sales': len(sale),
+                'contact_name': sale['contact_name'].iloc[0],
+                'phone': sale['phone'].iloc[0]
+            }
+        else:
             last_name = sale['last_name'].iloc[0]
             first_name = sale['first_name'].iloc[0]
 
-            sales.append({
+            return {
                 'id': int(sale[id_key].iloc[0]),
                 'name': f'{last_name}, {first_name}',
                 'n_sales': len(sale)
-            })
-
-        return sorted(sales, key=lambda key: key["n_sales"], reverse=inverse)
+            }
