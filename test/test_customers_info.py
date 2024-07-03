@@ -7,7 +7,9 @@ class TestCustomersInfo(unittest.TestCase):
     def setUp(self):
         self.customer_path = 'test/files/customer.csv'
         self.customer = pd.read_csv(self.customer_path, delimiter=';')
-        self.customer_info = CustomerInfo(self.customer)
+        self.order_path = 'test/files/order.csv'
+        self.order = pd.read_csv(self.order_path, delimiter=';')
+        self.customer_info = CustomerInfo(self.customer, self.order)
 
     def test_region(self):
         expected_result = {'Brazil': 1, 'USA': 1}
@@ -16,10 +18,6 @@ class TestCustomersInfo(unittest.TestCase):
         self.assertEqual(expected_result, result)
 
     def test_n_purchases(self):
-        order_path = 'test/files/order.csv'
-        order = pd.read_csv(order_path, delimiter=';')
-        merged_order = pd.merge(self.customer, order)
-
         expected_result = [
             {
                 'id': 'AAAAA',
@@ -36,6 +34,6 @@ class TestCustomersInfo(unittest.TestCase):
                 'phone': '000-0000002'
             }
         ]
-        result = self.customer_info.n_purchases(merged_order, True)
+        result = self.customer_info.n_purchases()
 
         self.assertEqual(expected_result, result)

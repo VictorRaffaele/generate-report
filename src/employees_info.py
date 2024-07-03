@@ -3,8 +3,9 @@ from .base import Base
 
 
 class EmployeesInfo(Base):
-    def __init__(self, employees: dict):
+    def __init__(self, employees: dict, orders: dict):
         self.__employees = employees
+        self.__orders = orders
 
     def region(self) -> object:
         countrys = super().region(self.__employees)
@@ -26,13 +27,13 @@ class EmployeesInfo(Base):
 
                     supervisors.append({
                         'name': f'{last_name}, {first_name}',
-                        'supervises': supervisor,
+                        'supervises': supervisor.to_dict(orient='records'),
                         'count': len(supervisor)
                     })
 
         return supervisors
 
-    def n_sales(self, df_orders: list[object], inverse=True) -> list[object]:
-        merged_orders = pd.merge(df_orders, self.__employees)
+    def n_sales(self, inverse=True) -> list[object]:
+        merged_orders = pd.merge(self.__orders, self.__employees)
         n_sales = super().n_sales(merged_orders, 'employee_id', inverse)
         return n_sales
